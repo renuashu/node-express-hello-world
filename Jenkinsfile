@@ -7,7 +7,8 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            steps {
+ 
+           steps {
                 sh 'docker build -t renukadocker26/my-express-app:$BUILD_NUMBER .'
             }
         }
@@ -15,7 +16,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
-                    sh 'docker push <your-dockerhub-username>/my-express-app:$BUILD_NUMBER'
+                    sh 'docker push renukadocker26/my-express-app:$BUILD_NUMBER'
                 }
             }
         }
